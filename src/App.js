@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <GoogleLogin
-        clientId="802994861131-pc800ev4qrfvkundvmpoca5eulp8o8bv.apps.googleusercontent.com"
+        clientId=""
         onSuccess={(res) => console.log(res)}
       />
     </div>
