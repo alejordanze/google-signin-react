@@ -1,20 +1,28 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import useLoadGoogleScript from '../hooks/useLoadGoogleScript';
 import { fetchUserData } from '../utils/fetchUtils';
 import GoogleService from '../utils/googleUtils';
-import GoogleIcon from '../assets/google-icon.png';
-import './styles.css';
+import './GoogleLogin.module.css';
+import image from '../assets/google-icon.png';
 
+interface GoogleLoginProps {
+  clientId: string;
+  containerClass: string;
+  onSuccess: Function;
+  children: ReactNode;
+  scope: string;
+  uxMode: string;
+}
 const GoogleLogin = ({
   clientId, containerClass, onSuccess, children, scope, uxMode
-}) => {
+}: GoogleLoginProps) => {
   const [OAuth2Client, setOAuth2Client] = useState(null);
-  const [googleResponse, setGoogleResponse] = useState(null);
+  const [googleResponse, setGoogleResponse] = useState<any>(null);
   const scriptLoadedSuccessfully = useLoadGoogleScript();
 
-  const initializeCallback = (response) => {
+  const initializeCallback = (response: any) => {
     if (response.error) console.error('error: ', response);
 
     fetchUserData(response.access_token)
@@ -40,8 +48,8 @@ const GoogleLogin = ({
   }, [googleResponse]);
 
   if (!children) return (
-    <div className="google">
-      <img src={GoogleIcon} className="icon"></img>
+    <div className="google-button" onClick={authUser}>
+      <img src={image} className="icon" />
       <span className="text">Sign In with Google</span>
     </div>
   );

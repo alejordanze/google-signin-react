@@ -1,5 +1,5 @@
 {
-  "name": "google-login-react",
+  "name": "google-login-react-ts",
   "description": "New Google Auth implementation",
   "author": "alejordanze",
   "keywords": [
@@ -8,12 +8,13 @@
     "auth",
     "oauth"
   ],
-  "version": "0.2.0",
+  "version": "0.0.3",
   "private": false,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "lib/cjs/lib/index.js",
+  "module": "lib/esm/lib/index.js",
+  "types": "lib/esm/lib/index.d.ts",
   "files": [
-    "dist",
+    "lib",
     "README.md"
   ],
   "repository": {
@@ -24,10 +25,13 @@
     "prop-types": "^15.8.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "start": "react-scripts-ts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "prepublishOnly": "yarn build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,8 +55,15 @@
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.9",
+    "@types/node-sass": "^4.11.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "node-sass": "^8.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts-ts": "3.1.0",
+    "typescript": "^4.9.3"
   }
 }

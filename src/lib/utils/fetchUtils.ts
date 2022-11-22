@@ -15,7 +15,7 @@ const GOOGLE_API_URL = 'https://www.googleapis.com/oauth2/v3/userinfo?grant_type
  * sub: string
  * }>}
  */
-async function fetchUserData(accessToken) {
+async function fetchUserData(accessToken: string): Promise<any> {
   return fetch(GOOGLE_API_URL, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,

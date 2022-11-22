@@ -3,11 +3,11 @@
 ## Install
 
 ```sh
-$ npm install google-login-react
+$ npm install google-login-react-ts
 
 # or
 
-$ yarn add google-login-react
+$ yarn add google-login-react-ts
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ $ yarn add google-login-react
 ### Usage with default button
 
 ```jsx
-import { GoogleLogin } from 'google-login-react';
+import { GoogleLogin } from 'google-login-react-ts';
 
 const App = () => {
   return (
@@ -30,7 +30,7 @@ const App = () => {
 ### Usage with custom button
 
 ```jsx
-import { GoogleLogin } from 'google-signin-react';
+import { GoogleLogin } from 'google-signin-react-ts';
 
 const App = () => {
   return (

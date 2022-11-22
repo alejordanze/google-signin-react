@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 /**
  * Initialize OAuth2 Token Client and returns OAuth2 Client
  * @param {string} clientId 
@@ -6,7 +12,7 @@
  * @param {string} scope
  * @returns {object | null}
  */
-function initializeGoogle(clientId, callback, uxMode = 'popup', scope = 'email profile openid') {
+function initializeGoogle(clientId: string, callback: Function, uxMode = 'popup', scope = 'email profile openid') {
   const { google } = window;
 
   if (!google) return;
@@ -26,7 +32,7 @@ function initializeGoogle(clientId, callback, uxMode = 'popup', scope = 'email p
  * @param {object} OAuth2Client 
  * @returns {void}
  */
-function authenticateUser(OAuth2Client) {
+function authenticateUser(OAuth2Client: any) {
   OAuth2Client.requestAccessToken();
 }
 
