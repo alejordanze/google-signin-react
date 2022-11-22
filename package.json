@@ -1,16 +1,27 @@
 {
-  "name": "google-signin-react",
-  "version": "0.1.0",
-  "private": true,
+  "name": "google-login-react",
+  "description": "New Google Auth implementation",
+  "author": "alejordanze",
+  "keywords": [
+    "react",
+    "google",
+    "auth",
+    "oauth"
+  ],
+  "version": "0.2.0",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejordanze/google-signin-react"
+  },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "prop-types": "^15.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,8 +48,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
-    "@babel/cli": "^7.19.3"
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.1"
   }
 }

@@ -1,13 +1,13 @@
-# Testing New Google Authentication
+# New Google Authentication
 
 ## Install
 
 ```sh
-$ npm install @react-oauth/google@latest
+$ npm install google-login-react
 
 # or
 
-$ yarn add @react-oauth/google@latest
+$ yarn add google-login-react
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ $ yarn add @react-oauth/google@latest
 ### Usage with default button
 
 ```jsx
-import { GoogleLogin } from 'google-signin-react';
+import { GoogleLogin } from 'google-login-react';
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
       clientId='<your_client_id>'
       onSuccess={(res) => console.log(res)}
     />
-  )
+  );
 }
 ```
 
@@ -46,6 +46,8 @@ const App = () => {
 ```
 
 ## Response
+
+### Google Response
 
 ```json
   {
@@ -70,3 +72,17 @@ const App = () => {
 | name   | `string` | Google user name                           |
 | picture   | `string` | Google user picture URL                           |
 | sub   | `string` | Google user sub ID                           |
+
+
+## API
+
+### GoogleLogin
+
+| Required  | Property                | Type       | Description                                                                 |
+| :--------: | ------------------- | ---------- | --------------------------------------------------------------------------- |
+|  ✅  | clientId            | `string`   | Google Project Client ID|
+|| containerClass | `boolean` | Children container className                                  |
+|  ✅  | onSuccess   | `(response: GoogleResponse) => void` | Callback fires after successful login                      |
+|| uxMode   | `popup` \| `redirect` | UX mode, right now only working with popup mode             |
+|| scope   | `string` | Google [scopes](https://developers.google.com/identity/protocols/oauth2/scopes)                          |
+|| children   | `element` | Element that replaces default button              |
