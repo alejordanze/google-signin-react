@@ -12,7 +12,7 @@ declare global {
  * @param {string} scope
  * @returns {object | null}
  */
-function initializeGoogle(clientId: string, callback: Function, uxMode = 'popup', scope = 'email profile openid') {
+function initializeGoogle(clientId: string, callback: Function, callbackError: Function, uxMode = 'popup', scope = 'email profile openid'): any {
   const { google } = window;
 
   if (!google) return;
@@ -21,7 +21,8 @@ function initializeGoogle(clientId: string, callback: Function, uxMode = 'popup'
     client_id: clientId,
     ux_mode: uxMode,
     scope,
-    callback
+    callback,
+    error_callback: callbackError
   });
 
   return OAuth2;
@@ -32,7 +33,7 @@ function initializeGoogle(clientId: string, callback: Function, uxMode = 'popup'
  * @param {object} OAuth2Client 
  * @returns {void}
  */
-function authenticateUser(OAuth2Client: any) {
+function authenticateUser(OAuth2Client: any): void {
   OAuth2Client.requestAccessToken();
 }
 

@@ -16,9 +16,13 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
+  "typeRoots": [
+    "src/lib/main.ts",
+  ],
   "include": [
-    "src"
-  ]
+    "src/lib",
+  ],
+  "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }

@@ -1,37 +1,34 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import useLoadGoogleScript from '../hooks/useLoadGoogleScript';
 import { fetchUserData } from '../utils/fetchUtils';
 import GoogleService from '../utils/googleUtils';
-import './GoogleLogin.module.css';
-import image from '../assets/google-icon.png';
+import { buttonStyles } from '../assets/styles';
+import { GoogleLoginProps } from '../types';
 
-interface GoogleLoginProps {
-  clientId: string;
-  containerClass: string;
-  onSuccess: Function;
-  children: ReactNode;
-  scope: string;
-  uxMode: string;
-}
 const GoogleLogin = ({
-  clientId, containerClass, onSuccess, children, scope, uxMode
-}: GoogleLoginProps) => {
+  clientId, containerClass, onSuccess, onError,
+  render, children, scope, uxMode, userInfoFetchURL
+}: GoogleLoginProps): JSX.Element | null => {
   const [OAuth2Client, setOAuth2Client] = useState(null);
   const [googleResponse, setGoogleResponse] = useState<any>(null);
   const scriptLoadedSuccessfully = useLoadGoogleScript();
 
-  const initializeCallback = (response: any) => {
+  const isClientIdValid = (): boolean => (!!clientId && !!clientId.trim());
+
+  const initializeCallback = (response: any): void => {
     if (response.error) console.error('error: ', response);
 
-    fetchUserData(response.access_token)
+    fetchUserData(response.access_token, userInfoFetchURL)
       .then((data) => setGoogleResponse(data));
   };
 
-  useMemo(() => {
-    const OAuth2 = GoogleService.initializeGoogle(clientId, initializeCallback, uxMode, scope);
-    
+  useMemo((): void => {
+    if (!isClientIdValid()) return;
+
+    const OAuth2 = GoogleService.initializeGoogle(clientId, initializeCallback, onError, uxMode, scope);
+
     setOAuth2Client(OAuth2);
   }, [scriptLoadedSuccessfully]);
 
@@ -41,16 +38,21 @@ const GoogleLogin = ({
     GoogleService.authenticateUser(OAuth2Client);
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     if (!googleResponse) return;
 
     onSuccess(googleResponse);
   }, [googleResponse]);
 
+  if (!isClientIdValid()) return null;
+
+  if (render && typeof render === 'function') {
+    return render({ onClick: authUser });
+  }
+
   if (!children) return (
-    <div className="google-button" onClick={authUser}>
-      <img src={image} className="icon" />
-      <span className="text">Sign In with Google</span>
+    <div style={buttonStyles} onClick={authUser}>
+      <span style={{ textAlign: "center", padding: "0 20px" }}>Sign In with Google</span>
     </div>
   );
 
@@ -63,18 +65,23 @@ const GoogleLogin = ({
 
 GoogleLogin.propTypes = {
   clientId: PropTypes.string.isRequired,
-  containerClass: PropTypes.string,
   onSuccess: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
+  containerClass: PropTypes.string,
+  render: PropTypes.func,
   uxMode: PropTypes.oneOf(['popup', 'redirect']),
   scope: PropTypes.string,
-  children: PropTypes.element
+  children: PropTypes.element,
+  userInfoFetchURL: PropTypes.string
 };
 
 GoogleLogin.defaultProps = {
   containerClass: undefined,
+  render: undefined,
   uxMode: undefined,
   scope: undefined,
-  children: undefined
+  children: undefined,
+  userInfoFetchURL: undefined
 };
 
 export default GoogleLogin;

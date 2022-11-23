@@ -1,5 +1,5 @@
 {
-  "name": "google-login-react-ts",
+  "name": "google-login-react",
   "description": "New Google Auth implementation",
   "author": "alejordanze",
   "keywords": [
@@ -8,11 +8,11 @@
     "auth",
     "oauth"
   ],
-  "version": "0.0.3",
+  "version": "0.2.8",
   "private": false,
-  "main": "lib/cjs/lib/index.js",
-  "module": "lib/esm/lib/index.js",
-  "types": "lib/esm/lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
   "files": [
     "lib",
     "README.md"
@@ -21,17 +21,12 @@
     "type": "git",
     "url": "git+https://github.com/alejordanze/google-signin-react"
   },
-  "dependencies": {
-    "prop-types": "^15.8.1"
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts-ts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build": "yarn build:esm && yarn build:cjs",
+    "build": "rm -rf lib && yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "prepublishOnly": "yarn build"
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +46,11 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies": {
+    "prop-types": "^15.8.1",
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.20.2",
@@ -64,6 +64,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts-ts": "3.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "typescript-plugin-css-modules": "^3.4.0"
   }
 }
