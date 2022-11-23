@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.module.scss';
+import './App.module.scss';
 import GoogleLogin from './lib/components/GoogleLogin';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <GoogleLogin
         clientId="802994861131-pc800ev4qrfvkundvmpoca5eulp8o8bv.apps.googleusercontent.com"
         onSuccess={success}
-        onError={(err) => console.log(err)}
+        onError={success}
         userInfoFetchURL="https"
       />
     </div>

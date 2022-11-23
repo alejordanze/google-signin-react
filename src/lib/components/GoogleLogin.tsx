@@ -66,7 +66,7 @@ const GoogleLogin = ({
 GoogleLogin.propTypes = {
   clientId: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired,
+  onError: PropTypes.func,
   containerClass: PropTypes.string,
   render: PropTypes.func,
   uxMode: PropTypes.oneOf(['popup', 'redirect']),
@@ -76,6 +76,7 @@ GoogleLogin.propTypes = {
 };
 
 GoogleLogin.defaultProps = {
+  onError: () => {},
   containerClass: undefined,
   render: undefined,
   uxMode: undefined,

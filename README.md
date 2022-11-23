@@ -3,11 +3,11 @@
 ## Install
 
 ```sh
-$ npm install google-login-react-ts
+$ npm install google-login-react
 
 # or
 
-$ yarn add google-login-react-ts
+$ yarn add google-login-react
 ```
 
 ## Usage
@@ -22,6 +22,7 @@ const App = () => {
     <GoogleLogin
       clientId='<your_client_id>'
       onSuccess={(res) => console.log(res)}
+      onError={(err) => console.log(err)}
     />
   );
 }
@@ -37,10 +38,31 @@ const App = () => {
     <GoogleLogin
       clientId='<your_client_id>'
       onSuccess={(res) => console.log(res)}
+      onError={(err) => console.log(err)}
       containerClass="<your_custom_class>"
     >
-      ...
+      <button>Google Login</button>
     </GoogleLogin>
+  )
+}
+```
+
+### Usage with render
+
+```jsx
+import { GoogleLogin } from 'google-signin-react-ts';
+
+const App = () => {
+  return (
+    <GoogleLogin
+      clientId='<your_client_id>'
+      onSuccess={(res) => console.log(res)}
+      onError={(err) => console.log(err)}
+      containerClass="<your_custom_class>"
+      render={(renderProps) => (
+        <button onClick={renderProps.onClick}>Google Login</button>
+      )}
+    />
   )
 }
 ```
@@ -64,7 +86,7 @@ const App = () => {
 
 | Property                | Type       | Description                                                                 |
 | ------------------- | ---------- | --------------------------------------------------------------------------- |
-| email            | `string`   | Google User email|
+| email            | `string`   | Google user email|
 | email_verified | `boolean` | Google user email is verified                                  |
 | family_name   | `string` | Google user family name                            |
 | given_name   | `string` | Google user given name                            |
@@ -80,9 +102,12 @@ const App = () => {
 
 | Required  | Property                | Type       | Description                                                                 |
 | :--------: | ------------------- | ---------- | --------------------------------------------------------------------------- |
-|  ✅  | clientId            | `string`   | Google Project Client ID|
-|| containerClass | `boolean` | Children container className                                  |
+|  ✅  | clientId            | `string`   | Google Project Client ID |
+|| containerClass | `boolean` | Container className                                  |
 |  ✅  | onSuccess   | `(response: GoogleResponse) => void` | Callback fires after successful login                      |
+|| onError   | `(response: Error) => void` | Callback fires after unsuccessful login                      |
 || uxMode   | `popup` \| `redirect` | UX mode, right now only working with popup mode             |
 || scope   | `string` | Google [scopes](https://developers.google.com/identity/protocols/oauth2/scopes)                          |
 || children   | `element` | Element that replaces default button              |
+|| render   | `({ onClick }) => void` | Render JSX Element passing onClick function      |
+|| userInfoFetchURL   | `string` \| [default](https://www.googleapis.com/oauth2/v3/userinfo?grant_type=authorization_token) | URL to retrive Google User info       |

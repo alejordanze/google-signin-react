@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 const SCRIPT_URL = "https://accounts.google.com/gsi/client";
 
-const useLoadGoogleScript = () => {
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+const useLoadGoogleScript = (): boolean => {
+  const [scriptLoaded, setScriptLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -11,11 +11,11 @@ const useLoadGoogleScript = () => {
     script.src = SCRIPT_URL;
     script.async = true;
     script.defer = true;
-    script.onload = () => {
+    script.onload = (): void => {
       setScriptLoaded(true);
     };
 
-    script.onerror = () => {
+    script.onerror = (): void => {
       setScriptLoaded(false);
     };
 

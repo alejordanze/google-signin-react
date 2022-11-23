@@ -12,7 +12,7 @@ declare global {
  * @param {string} scope
  * @returns {object | null}
  */
-function initializeGoogle(clientId: string, callback: Function, callbackError: Function, uxMode = 'popup', scope = 'email profile openid'): any {
+function initializeGoogle(clientId: string, callback: Function, callbackError: Function, uxMode = 'redirect', scope = 'email profile openid'): any {
   const { google } = window;
 
   if (!google) return;
